@@ -1,278 +1,239 @@
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.sov-page {
+.sov {
   width: 100%;
   background: #0d0c0a;
   color: #ede8dc;
-  padding: 3.5rem 3rem 5rem 3rem;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.sov-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem 5rem;
   position: relative;
-  overflow: hidden;
 }
 
 .sov-ghost {
   position: absolute;
   top: 50%;
-  right: 3rem;
-  transform: translateY(-52%);
+  right: -1rem;
+  transform: translateY(-50%);
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: 22rem;
+  font-size: 18rem;
   line-height: 1;
   color: rgba(200,164,90,0.05);
   user-select: none;
   pointer-events: none;
   animation: ghostPulse 9s ease-in-out infinite;
+  z-index: 0;
 }
 
 @keyframes ghostPulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.35; }
 }
 
-.sov-content {
+.sov-z {
   position: relative;
   z-index: 1;
-  width: 100%;
 }
 
-.sov-datestamp {
+.sov-date {
   font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #c43030;
   text-align: right;
   margin-bottom: 2.8rem;
-  animation: fadeUp 0.5s ease 0.1s both;
+  animation: up 0.5s ease 0.1s both;
 }
 
 .sov-epigraph {
-  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   line-height: 1.9;
   color: #9a9285;
-  padding-left: 1.4rem;
+  padding-left: 1.3rem;
   border-left: 1px solid rgba(200,164,90,0.5);
-  margin-bottom: 3.2rem;
-  animation: fadeUp 0.8s ease 0.2s both;
+  margin-bottom: 3rem;
+  animation: up 0.7s ease 0.2s both;
 }
 
 .sov-epigraph cite {
   display: block;
   font-family: 'Space Mono', monospace;
   font-style: normal;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-size: 0.57rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #7a6230;
-  margin-top: 0.8rem;
-}
-
-.sov-chain {
-  width: 100%;
-  margin-bottom: 0;
+  margin-top: 0.7rem;
 }
 
 .sov-layer {
-  width: 100%;
   display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 0 1.6rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(200,164,90,0.12);
+  grid-template-columns: 2.8rem 1fr;
+  column-gap: 1.4rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(200,164,90,0.11);
   position: relative;
-  animation: fadeUp 0.55s ease both;
+  animation: up 0.55s ease both;
 }
-
-.sov-layer:first-child {
-  border-top: 1px solid rgba(200,164,90,0.12);
-}
-
-.sov-layer::before {
+.sov-layer:first-of-type { border-top: 1px solid rgba(200,164,90,0.11); }
+.sov-layer::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(200,164,90,0.05), transparent 60%);
+  background: linear-gradient(90deg, rgba(200,164,90,0.055), transparent 55%);
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
 }
-.sov-layer:hover::before { opacity: 1; }
+.sov-layer:hover::after { opacity: 1; }
 
 .sov-layer:nth-child(1) { animation-delay: 0.35s; }
-.sov-layer:nth-child(2) { animation-delay: 0.52s; }
-.sov-layer:nth-child(3) { animation-delay: 0.69s; }
-.sov-layer:nth-child(4) { animation-delay: 0.86s; }
-.sov-layer:nth-child(5) { animation-delay: 1.03s; }
+.sov-layer:nth-child(2) { animation-delay: 0.5s; }
+.sov-layer:nth-child(3) { animation-delay: 0.65s; }
+.sov-layer:nth-child(4) { animation-delay: 0.8s; }
+.sov-layer:nth-child(5) { animation-delay: 0.95s; }
 
 .sov-num {
-  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: 2.2rem;
-  line-height: 1.05;
+  font-size: 2.1rem;
+  line-height: 1.1;
   color: #c8a45a;
   text-align: right;
-  padding-top: 0.15rem;
-  flex-shrink: 0;
+  padding-top: 0.1rem;
 }
-
-.sov-body {}
 
 .sov-meta {
   font-family: 'Space Mono', monospace;
-  font-size: 0.57rem;
-  letter-spacing: 0.2em;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #7a6230;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
 }
 
-.sov-meta .dot { color: rgba(200,164,90,0.25); margin: 0 0.4rem; }
+.sov-meta .dot { color: rgba(200,164,90,0.22); margin: 0 0.35rem; }
 
 .sov-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.08rem;
-  line-height: 1.72;
+  font-size: 1.05rem;
+  line-height: 1.75;
   font-weight: 300;
   color: #ede8dc;
 }
-
-.sov-text em { color: #e8d09a; font-style: italic; }
+.sov-text em  { color: #e8d09a; font-style: italic; }
 .sov-text strong { color: #c8a45a; font-weight: 400; }
 
 .sov-badge {
   display: inline-block;
   font-family: 'Space Mono', monospace;
-  font-size: 0.53rem;
-  letter-spacing: 0.17em;
+  font-size: 0.52rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  border: 1px solid rgba(200,164,90,0.2);
-  padding: 3px 9px;
+  border: 1px solid rgba(200,164,90,0.18);
+  padding: 3px 8px;
   color: #9a9285;
-  margin-top: 0.6rem;
+  margin-top: 0.55rem;
 }
-
-.sov-badge.red {
-  border-color: rgba(140,32,32,0.55);
-  color: #c43030;
-}
+.sov-badge.red { border-color: rgba(140,32,32,0.5); color: #c43030; }
 
 .sov-rule {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin: 2.8rem 0 2.5rem;
-  animation: fadeUp 0.5s ease 1.3s both;
+  animation: up 0.5s ease 1.2s both;
 }
-.sov-rule::before, .sov-rule::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-}
-.sov-rule::before { background: linear-gradient(90deg, transparent, rgba(200,164,90,0.4)); }
-.sov-rule::after  { background: linear-gradient(90deg, rgba(200,164,90,0.4), transparent); }
-.sov-rule-glyph {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: #c8a45a;
-  letter-spacing: 0.4em;
-}
-
-.sov-thesis {
-  width: 100%;
-  animation: fadeUp 0.7s ease 1.5s both;
-}
+.sov-rule::before { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,90,0.4)); }
+.sov-rule::after  { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(200,164,90,0.4), transparent); }
+.sov-rule span { font-size: 1rem; color: #c8a45a; letter-spacing: 0.4em; }
 
 .sov-graf {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   line-height: 1.88;
   font-weight: 300;
   color: #9a9285;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.5rem;
+  animation: up 0.7s ease 1.4s both;
 }
+.sov-graf em     { color: #ede8dc; font-style: italic; }
+.sov-graf strong { color: #e8d09a; font-weight: 400; }
+.sov-graf .struck { text-decoration: line-through; color: rgba(154,146,133,0.4); }
 
-.sov-graf em { color: #ede8dc; font-style: italic; }
-.sov-graf strong { font-weight: 400; color: #e8d09a; }
-.sov-graf .struck { text-decoration: line-through; color: rgba(154,146,133,0.45); }
-
-.sov-scalar {
-  width: 100%;
+.sov-block {
   margin-top: 2.8rem;
-  padding: 1.8rem 2rem;
-  border: 1px solid rgba(200,164,90,0.15);
+  padding: 1.7rem 1.8rem;
+  border: 1px solid rgba(200,164,90,0.13);
   border-left: 2px solid #8c2020;
-  background: linear-gradient(135deg, rgba(140,32,32,0.07), transparent 70%);
+  background: linear-gradient(135deg, rgba(140,32,32,0.07), transparent 65%);
   position: relative;
-  animation: fadeUp 0.7s ease 2s both;
+  animation: up 0.7s ease 1.9s both;
 }
-
-.sov-scalar::before {
+.sov-block::before {
   content: 'scalar · 0';
   position: absolute;
   top: -0.52rem;
-  left: 1.6rem;
+  left: 1.4rem;
   font-family: 'Space Mono', monospace;
-  font-size: 0.54rem;
-  letter-spacing: 0.22em;
+  font-size: 0.53rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #c43030;
   background: #0d0c0a;
-  padding: 0 0.5rem;
+  padding: 0 0.45rem;
 }
-
-.sov-scalar-text {
-  font-family: 'Cormorant Garamond', serif;
+.sov-block p {
   font-style: italic;
   font-weight: 300;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   line-height: 1.82;
   color: #ede8dc;
 }
-
-.sov-scalar-text strong { font-style: normal; font-weight: 400; color: #e8d09a; }
+.sov-block p strong { font-style: normal; font-weight: 400; color: #e8d09a; }
 
 .sov-close {
-  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #7a6230;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.42em;
   text-align: center;
   margin-top: 4rem;
-  animation: fadeUp 0.6s ease 2.4s both;
+  animation: up 0.6s ease 2.3s both;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
+@keyframes up {
+  from { opacity: 0; transform: translateY(11px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 </style>
 
-<div class="sov-page">
-  <div class="sov-ghost">0</div>
-  <div class="sov-content">
+<div class="sov">
+  <div class="sov-inner">
+    <div class="sov-ghost">0</div>
+    <div class="sov-z">
 
-    <div class="sov-datestamp">06 May 2026 &nbsp;·&nbsp; Kampala, Uganda</div>
+      <div class="sov-date">06 May 2026 · Kampala, Uganda</div>
 
-    <blockquote class="sov-epigraph">
-      All art is at once surface and symbol.<br>
-      Those who go beneath the surface do so at their peril.<br>
-      Those who read the symbol do so at their peril.
-      <cite>Oscar Wilde &nbsp;·&nbsp; Preface, The Picture of Dorian Gray</cite>
-    </blockquote>
-
-    <div class="sov-chain">
+      <blockquote class="sov-epigraph">
+        All art is at once surface and symbol.<br>
+        Those who go beneath the surface do so at their peril.<br>
+        Those who read the symbol do so at their peril.
+        <cite>Oscar Wilde · Preface, The Picture of Dorian Gray</cite>
+      </blockquote>
 
       <div class="sov-layer">
         <div class="sov-num">3+</div>
-        <div class="sov-body">
+        <div>
           <div class="sov-meta">Tensor<span class="dot">·</span>Sensation<span class="dot">·</span>Hypertext</div>
           <div class="sov-text">Diaspora energy. Youth bulge. The <em>raw entanglement</em> of postcolonial anxiety, remittance power, ethnic memory, and the digital noise of the NUP — <strong>reality before it has been named.</strong></div>
           <span class="sov-badge">before the bill existed</span>
@@ -281,7 +242,7 @@
 
       <div class="sov-layer">
         <div class="sov-num">2</div>
-        <div class="sov-body">
+        <div>
           <div class="sov-meta">Matrix<span class="dot">·</span>Attention<span class="dot">·</span>Context</div>
           <div class="sov-text">Timing. Urgency. The military's shadow over parliament. January election, disputed count, Bobi Wine in US exile. When you look at the correlations, <em>the eigenmode being protected is not the nation's — it is the regime's.</em></div>
           <span class="sov-badge">the compression begins</span>
@@ -290,7 +251,7 @@
 
       <div class="sov-layer">
         <div class="sov-num">1</div>
-        <div class="sov-body">
+        <div>
           <div class="sov-meta">Vector<span class="dot">·</span>Intention<span class="dot">·</span>Subtext</div>
           <div class="sov-text">"Foreign influence" defined broadly enough to catch diaspora advocacy. The specific path carved through possibility space. <em>The geodesic for the opposition narrowed to silence.</em></div>
           <span class="sov-badge red">target selection</span>
@@ -299,7 +260,7 @@
 
       <div class="sov-layer">
         <div class="sov-num">E</div>
-        <div class="sov-body">
+        <div>
           <div class="sov-meta">Eigenmode<span class="dot">·</span>Reaction<span class="dot">·</span>Text</div>
           <div class="sov-text">The enduring frequency that must survive every perturbation. NRM patronage structure. Security doctrine. The historical monopoly on <em>who is permitted to compute the scalar.</em></div>
           <span class="sov-badge">preserved at all costs</span>
@@ -308,18 +269,14 @@
 
       <div class="sov-layer">
         <div class="sov-num">0</div>
-        <div class="sov-body">
+        <div>
           <div class="sov-meta">Scalar<span class="dot">·</span>Action<span class="dot">·</span>Pretext</div>
           <div class="sov-text">The bill passes. One number. The loop closes for the regime. <em>"Protecting sovereignty."</em> The surface scalar is perfectly defensible — <strong>this is by design.</strong></div>
           <span class="sov-badge red">passed · 06 May 2026</span>
         </div>
       </div>
 
-    </div>
-
-    <div class="sov-rule"><span class="sov-rule-glyph">· · ·</span></div>
-
-    <div class="sov-thesis">
+      <div class="sov-rule"><span>· · ·</span></div>
 
       <p class="sov-graf">Sovereignty is <strong>the ability to compute your own scalar.</strong> This bill is a <strong>computation tax</strong> — paid not in money, but in <em>self-censorship.</em> The most efficient scalar control is the one you internalize.</p>
 
@@ -329,13 +286,12 @@
 
       <p class="sov-graf">So the state adapted: internet shutdowns as <strong>emergency metric rewrites,</strong> reimposing Newtonian friction on relativistic propagation. And when that too proved insufficient, <em>a law that makes the diaspora visible to itself as a target.</em></p>
 
-      <div class="sov-scalar">
-        <div class="sov-scalar-text">Your peers were trapped in the text. The text is designed to be a <strong>Newtonian payload</strong> — heavy, slow, and distracting. To go beneath is to reconstruct the tensor that produced the scalar. That is <strong>politically dangerous territory.</strong> And that is exactly where we must go.</div>
+      <div class="sov-block">
+        <p>Your peers were trapped in the text. The text is designed to be a <strong>Newtonian payload</strong> — heavy, slow, and distracting. To go beneath is to reconstruct the tensor that produced the scalar. That is <strong>politically dangerous territory.</strong> And that is exactly where we must go.</p>
       </div>
 
+      <div class="sov-close">3+ → 2 → 1 → E → 0 &nbsp;↺</div>
+
     </div>
-
-    <div class="sov-close">3+ → 2 → 1 → E → 0 &nbsp;↺</div>
-
   </div>
 </div>

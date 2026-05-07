@@ -1,0 +1,361 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inconsolata:wght@300;400;500&display=swap');
+
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: #7A6030;
+    --ash: #3a3830;
+    --ink: #1a1814;
+    --parchment: #f2ede3;
+    --parchment-dark: #e0d9cc;
+    --red-mark: #8B2020;
+    --fade: rgba(201,168,76,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body, .wrap {
+    background: transparent;
+    color: var(--color-text-primary);
+    font-family: 'Inconsolata', monospace;
+  }
+
+  .wrap {
+    max-width: 680px;
+    padding: 2.5rem 1.5rem 3rem;
+    position: relative;
+  }
+
+  .epigraph {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .epigraph cite {
+    display: block;
+    font-size: 0.78rem;
+    font-family: 'Inconsolata', monospace;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-top: 0.6rem;
+  }
+
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0 1rem;
+    padding: 1rem 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: background 0.2s;
+  }
+
+  .layer:first-child { border-top: 0.5px solid var(--color-border-tertiary); }
+
+  .layer:hover { background: var(--color-background-secondary); }
+
+  .layer-num {
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    padding-top: 2px;
+    letter-spacing: -0.03em;
+  }
+
+  .layer-body {}
+
+  .layer-title {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .layer-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+  }
+
+  .layer-text em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .layer-tag {
+    display: inline-block;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 0.5px solid var(--color-border-tertiary);
+    padding: 2px 7px;
+    border-radius: 2px;
+    color: var(--color-text-tertiary);
+    margin-top: 0.4rem;
+  }
+
+  .layer-tag.hot {
+    border-color: var(--red-mark);
+    color: var(--red-mark);
+  }
+
+  .divider {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin: 2rem 0 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.4s forwards;
+  }
+
+  .thesis {
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.6s forwards;
+  }
+
+  .thesis-line {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    margin-bottom: 1.4rem;
+  }
+
+  .thesis-line strong {
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .thesis-line .struck {
+    text-decoration: line-through;
+    color: var(--color-text-tertiary);
+  }
+
+  .scalar-final {
+    margin-top: 2.5rem;
+    padding: 1.4rem;
+    border: 0.5px solid var(--color-border-secondary);
+    border-left: 2px solid var(--red-mark);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 2.2s forwards;
+  }
+
+  .scalar-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red-mark);
+    margin-bottom: 0.6rem;
+  }
+
+  .scalar-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-primary);
+    font-style: italic;
+  }
+
+  .ghost-zero {
+    position: absolute;
+    top: 2rem;
+    right: 1.5rem;
+    font-family: 'IM Fell English', serif;
+    font-size: 7rem;
+    color: var(--color-border-tertiary);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0;
+    animation: ghostIn 2s ease 0.5s forwards;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes ghostIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .layer:nth-child(1) { animation: slideIn 0.5s ease 0.5s forwards; }
+  .layer:nth-child(2) { animation: slideIn 0.5s ease 0.7s forwards; }
+  .layer:nth-child(3) { animation: slideIn 0.5s ease 0.9s forwards; }
+  .layer:nth-child(4) { animation: slideIn 0.5s ease 1.1s forwards; }
+  .layer:nth-child(5) { animation: slideIn 0.5s ease 1.3s forwards; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+</style>
+
+<div class="wrap">
+  <div class="ghost-zero">0</div>
+
+  <div class="content">
+
+    <blockquote class="epigraph">
+      All art is at once surface and symbol.<br>
+      Those who go beneath the surface do so at their peril.<br>
+      Those who read the symbol do so at their peril.
+      <cite>— Oscar Wilde &nbsp;·&nbsp; Preface to Dorian Gray</cite>
+    </blockquote>
+
+    <div class="chain">
+
+      <div class="layer">
+        <div class="layer-num">3+</div>
+        <div class="layer-body">
+          <div class="layer-title">Tensor &nbsp;·&nbsp; Sensation &nbsp;·&nbsp; Hypertext</div>
+          <div class="layer-text">
+            Diaspora energy. Youth bulge. Ethnic memory. Digital noise of the NUP.
+            The raw entanglement of <em>postcolonial anxiety, remittance power,
+            and narrative synchronization</em> — reality before it has been named.
+          </div>
+          <span class="layer-tag">before the bill</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">2</div>
+        <div class="layer-body">
+          <div class="layer-title">Matrix &nbsp;·&nbsp; Attention &nbsp;·&nbsp; Context</div>
+          <div class="layer-text">
+            Timing. Urgency. Military shadow. The January election, the disputed count,
+            Bobi Wine in exile. When you look at the correlations,
+            the <em>eigenmode being protected is not the nation's —
+            it is the regime's.</em>
+          </div>
+          <span class="layer-tag">the compression</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">1</div>
+        <div class="layer-body">
+          <div class="layer-title">Vector &nbsp;·&nbsp; Intention &nbsp;·&nbsp; Subtext</div>
+          <div class="layer-text">
+            The specific path carved through possibility space.
+            "Foreign influence" defined broadly enough
+            to catch diaspora advocacy. The geodesic for the opposition
+            <em>narrowed to silence.</em>
+          </div>
+          <span class="layer-tag hot">target selection</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">E</div>
+        <div class="layer-body">
+          <div class="layer-title">Eigenmode &nbsp;·&nbsp; Reaction &nbsp;·&nbsp; Text</div>
+          <div class="layer-text">
+            The enduring frequency that must survive every perturbation.
+            The security apparatus. The NRM patronage structure.
+            The historical monopoly on <em>who is permitted
+            to compute the scalar.</em>
+          </div>
+          <span class="layer-tag">preserved at all costs</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">0</div>
+        <div class="layer-body">
+          <div class="layer-title">Scalar &nbsp;·&nbsp; Action &nbsp;·&nbsp; Pretext</div>
+          <div class="layer-text">
+            The bill passes. One number. The loop closes for the regime.
+            "Protecting sovereignty." The surface
+            scalar is perfectly defensible —
+            <em>this is by design.</em>
+          </div>
+          <span class="layer-tag hot">May 6, 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider">· · · the deeper reading · · ·</div>
+
+    <div class="thesis">
+
+      <p class="thesis-line">
+        Sovereignty is <strong>the ability to compute your own scalar.</strong>
+        This bill is a <strong>computation tax</strong> —
+        not paid in money, but in <strong>self-censorship.</strong>
+      </p>
+
+      <p class="thesis-line">
+        The most efficient scalar control is the one you internalize.
+        The ideal outcome is not a prosecution.
+        It is every diaspora Muganda asking
+        <em>"am I a foreign agent?"</em>
+        before tweeting.
+      </p>
+
+      <p class="thesis-line">
+        Arresting Bobi Wine in 2020 did not stop "him" from tweeting.
+        The body was contained. The <strong>signal had already distributed
+        itself across the network.</strong>
+        The state learned: the Newtonian army cannot arrest
+        a <span class="struck">person</span> <strong>synchronization node.</strong>
+      </p>
+
+      <p class="thesis-line">
+        So the state adapted. Internet shutdown as
+        <strong>emergency metric rewrite</strong> —
+        reimposing Newtonian friction on relativistic propagation.
+        And when that too failed,
+        <em>a law that makes the diaspora
+        visible to itself as a target.</em>
+      </p>
+
+      <div class="scalar-final">
+        <div class="scalar-label">The peril Wilde warned about</div>
+        <div class="scalar-text">
+          Your peers were trapped in the text. The text is designed to be
+          a Newtonian payload — heavy, slow, and distracting.
+          To go beneath is to reconstruct the tensor that produced the scalar.
+          That is politically dangerous territory.
+          And that is exactly where we must go.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
